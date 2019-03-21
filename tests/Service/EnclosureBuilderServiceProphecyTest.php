@@ -18,7 +18,7 @@ use Prophecy\Argument;
 
 class EnclosureBuilderServiceProphecyTest extends TestCase
 {
-    public function testItBuildsAndPersistsEnclosure()
+    public function testItBuildsAndPersistsEnclosureProphecy()
     {
         $em = $this->prophesize(EntityManagerInterface::class);
         $em->persist(Argument::type(Enclosure::class))

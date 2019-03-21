@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class EnclosureBuilderServiceTest extends TestCase
 {
-    public function testItBuildsAndPersistsEnclosure()
+    public function testItBuildsEnclosureWithSpecifications()
     {
         $em = $this->createMock(EntityManagerInterface::class);
         $dinoFactory = $this->createMock(DinosaurFactory::class);
