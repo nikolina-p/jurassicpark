@@ -12,7 +12,6 @@ class DefaultControllerTest extends WebTestCase
     {
         $this->loadFixtures([
             LoadBasicParkData::class,
-            LoadSecurityData::class,
         ]);
 
         $client = $this->makeClient();
@@ -21,6 +20,6 @@ class DefaultControllerTest extends WebTestCase
         $this->assertStatusCode(200, $client);
 
         $table = $crawler->filter('.table-enclosures');
-        $this->assertCount(3, $table->filter('tbody tr'));
+        $this->assertCount(4, $table->filter('tbody tr'));
     }
 }

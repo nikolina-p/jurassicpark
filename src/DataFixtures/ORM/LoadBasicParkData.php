@@ -4,13 +4,31 @@ namespace App\DataFixtures\ORM;
 
 use App\Entity\Dinosaur;
 use App\Entity\Enclosure;
+use App\Service\EnclosureBuilderService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadBasicParkData extends Fixture implements OrderedFixtureInterface
 {
+    private $enclosureBuilderService;
+
+    public function __construct(EnclosureBuilderService $enclosureBuilderService)
+    {
+        $this->enclosureBuilderService = $enclosureBuilderService;
+    }
+
     public function load(ObjectManager $manager)
+    {
+        $enclosures = $this->enclosureBuilderService->buildEnclosures(4, 2, 3);
+
+        foreach ($enclosures as $enclosure) {
+            $manager->persist($enclosure);
+        }
+        $manager->flush();
+    }
+
+    /**public function load(ObjectManager $manager)
     {
         $carnivorousEnclosure = new Enclosure();
         $manager->persist($carnivorousEnclosure);
@@ -30,7 +48,7 @@ class LoadBasicParkData extends Fixture implements OrderedFixtureInterface
         $this->addDinosaur($manager, $herbivorousEnclosure, 'Triceratops', false, 7);
 
         $manager->flush();
-    }
+    }**/
 
     public function getOrder()
     {

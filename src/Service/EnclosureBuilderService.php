@@ -25,6 +25,18 @@ class EnclosureBuilderService
         $this->dinosaurFactory = $dinosaurFactory;
     }
 
+    public function buildEnclosures(int $noOfEnclosures = 1, int $numberOfSecuritySystems = 1, int $numberOfDinosaurs = 3): array
+    {
+        $enclosures = [];
+        for ($i = 0; $i<$noOfEnclosures; $i++) {
+            $enclosure = new Enclosure();
+            $this->addSecuritySystems($numberOfSecuritySystems, $enclosure);
+            $this->addDinosaurs($numberOfDinosaurs, $enclosure);
+            $enclosures[] = $enclosure;
+        }
+        return $enclosures;
+    }
+
     public function buildEnclosure(int $numberOfSecuritySystems = 1, int $numberOfDinosaurs = 3): Enclosure
     {
         $enclosure = new Enclosure();
