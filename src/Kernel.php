@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Liip\FunctionalTestBundle\LiipFunctionalTestBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -21,6 +22,11 @@ class Kernel extends BaseKernel
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
                 yield new $class();
+            }
+        }
+        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+            if ('test' === $this->getEnvironment()) {
+                $bundles[] = new LiipFunctionalTestBundle();
             }
         }
     }
