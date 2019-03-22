@@ -43,6 +43,11 @@ class Enclosure
         }
     }
 
+    public function dinosaurCount(): int
+    {
+        return count($this->dinosaurs);
+    }
+
     public function addDinosaur(Dinosaur $dinosaur)
     {
         if (!$this->isSecurityActive()) {
