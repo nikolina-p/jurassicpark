@@ -12,12 +12,12 @@ class LoadSecurityData extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        // getReference() - object sharing between different Fixture classes;
+        // loads object with reference 'herbivorous-enclosure' which was set bu class with order 1
         $herbivorousEnclosure = $this->getReference('herbivorous-enclosure');
-
         $this->addSecurity($herbivorousEnclosure, 'Fence', true);
 
         $carnivorousEnclosure = $this->getReference('carnivorous-enclosure');
-
         $this->addSecurity($carnivorousEnclosure, 'Electric fence', false);
         $this->addSecurity($carnivorousEnclosure, 'Guard tower', false);
 

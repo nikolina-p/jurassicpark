@@ -7,11 +7,20 @@
         {% for enclosure in enclosures %}
             <tr id="enclosure-{{ enclosure.id }}">
                 <td>
-                    Enclosure no {{ enclosure.id+1 }}
+                    Enclosure no {{ enclosure.id }}
                 </td>
                 <td>
                     Contains <strong>{{ enclosure.dinosaurCount }}</strong> dinosaur(s)
                 </td>
+                {% if enclosure.isSecurityActive %}
+                    <td>
+                        🔒 Secured
+                    </td>
+                {% else %}
+                    <td>
+                        <button class="button-alarm">ALARM</button>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
