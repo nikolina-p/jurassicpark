@@ -58,6 +58,7 @@ class Enclosure
             throw new NotABuffetException();
         }
         $this->dinosaurs[] = $dinosaur;
+        return true;
     }
 
     public function getId(): int

@@ -24,7 +24,7 @@ class LoadEnclosureData extends Fixture implements OrderedFixtureInterface
 
         $this->addDinosaur($manager, $carnivorousEnclosure, 'Velociraptor', true, 3);
         $this->addDinosaur($manager, $carnivorousEnclosure, 'Velociraptor', true, 1);
-        //$this->addDinosaur($manager, $carnivorousEnclosure, 'Velociraptor', true, 5);
+        $this->addDinosaur($manager, $carnivorousEnclosure, 'Velociraptor', true, 5);
         $this->addDinosaur($manager, $herbivorousEnclosure, 'Triceratops', false, 7);
 
         $manager->flush();

@@ -44,6 +44,33 @@ class DefaultControllerTest extends WebTestCase
         $this->assertCount(1, $crawler->filter('.button-alarm'));
     }
 
+    public function testFormGrowsADinosaurFromSpecification()
+    {
+        $this->loadFixtures([
+            LoadEnclosureData::class,
+            LoadSecurityData::class,
+        ]);
+
+        $this->client = $this->makeClient();
+        //$this->client->followRedirect();
+
+        $crawler = $this->client->request('GET', '/lucky');
+
+        //first check if the form loads
+        $this->assertStatusCode(200, $this->client);
+        $this->assertCount(1, $crawler->filter('.dino-form'));
+
+        //submit the form
+        $form = $crawler->selectButton('Grow dinosaur')->form();
+        $form['enclosure']->select(2);
+        $form['specification']->setValue("large herbivore");
+        $this->client->submit($form);
+
+        //$this->client->followRedirect();
+
+        $this->assertEquals(3, substr($this->client->getResponse()->getStatusCode(), 0, 1));
+    }
+
     protected function onNotSuccessfulTest(Throwable $t)
     {
         echo $t->getMessage().' Line: '.$t->getLine().' \n\n';
